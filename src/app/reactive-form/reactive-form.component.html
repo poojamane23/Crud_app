@@ -1,0 +1,66 @@
+<p>reactive-form works!</p>
+<h1>Reactive Forms with Validations</h1>
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmitData()">
+    <div class="form-group">
+        <label>First Name: </label>
+        <input type="text" name="fname" formControlName="fname" class="form-control"
+        
+        required [ngClass]="{'is-invalid': isSubmitted && f.fname.errors}">
+        
+        <div *ngIf="isSubmitted && f.fname.errors?.required" class="invalid-feedback">
+            First Name is Required
+        </div> 
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lname" class="form-control" formControlName="lname"
+        required [ngClass]="{'is-invalid': isSubmitted && f.lname.errors}">
+        
+        <div *ngIf="isSubmitted && f.lname.errors?.required" class="invalid-feedback">
+            Last Name is Required
+        </div> 
+    </div>
+
+    <label>Email: </label>
+        <input type="email" name="email" formControlName="email" class="form-control"
+        required [ngClass]="{'is-invalid': isSubmitted && f.email.errors}" >
+        <div *ngIf="isSubmitted && f.email.errors?.required" class="invalid-feedback">
+            Email is Required
+        </div>
+        <div *ngIf="isSubmitted && f.email.errors?.pattern" class="invalid-feedback">
+            Please Enter Valid Email
+        </div>
+
+    <div class="form-group">
+        <label for="course">Course:</label>
+        <select name="course" id="" class="form-control" formControlName="course">
+            <option *ngFor="let course of courses">{{course}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="gender">Gender:</label>
+        <input type="radio" name="gender" class=" radio" value="male" formControlName="gender">
+        <label for="male">Male</label>
+        <input type="radio" name="gender" class=" radio" value="female" formControlName="gender">
+        <label for="female">Female</label>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="pass" class="form-control" formControlName="pass">
+    </div>
+
+    <div class="form-group">
+        <label for="cpassword">Confirm Password:</label>
+        <input type="password" name="cpass" class="form-control" formControlName="cpass">
+    </div> <br>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-info">Submit</button>
+        
+    </div>
+
+</form>

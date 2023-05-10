@@ -1,0 +1,76 @@
+<p>template-form2 works!</p>
+<form name="myForm" #form="ngForm" (ngSubmit)="OnSubmit(form)">
+    <div class="form-group">
+        <input type="hidden" name="id" class="form-control" #id="ngModel" ngModel
+         [(ngModel)]="idd" >
+    </div>
+  <div class="form-group">
+    <label for="fname">First Name</label>
+    <input type="text" class="form-control" name="fname" #fname="ngModel"
+     ngModel required [ngClass]="{'is-invalid':form.submitted && fname.invalid}" [(ngModel)]="fn">
+    <div *ngIf="form.submitted && fname.invalid" class="invalid-feedback">
+        First Name is requires
+    </div>
+    </div>
+  <div class="form-group">
+    <label for="lname">Last Name</label>
+    <input type="text" class="form-control" name="lname" #lname="ngModel" ngModel
+    required [ngClass]="{'is-invalid': form.submitted && lname.invalid}" [(ngModel)]="ln">
+    <div *ngIf="form.submitted && lname.invalid" class="invalid-feedback">
+        Last Name is required
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" name="email" #email="ngModel" ngModel
+    required [ngClass]="{'is-invalid' : form.submitted && email.invalid}" [(ngModel)]="em"
+   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"> 
+   <div *ngIf="email.touched" class="invalid-feedback">
+    <div *ngIf="email.errors?.['required']" >Email is required.</div>
+    <div *ngIf="email.errors?.['pattern']" >Email is not valid, please enter valid email.</div>
+</div>  
+</div>
+  <div class="form-group">
+    <label for="Course">Course:</label>
+    <select for="course" class="form-control" name="course" #course="ngModel" ngModel [(ngModel)]="cor">
+        <option *ngFor="let cor of Course">{{cor}}</option>  
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="pass" #password="ngModel" ngModel [(ngModel)]="ps">
+  </div>
+  <div class="form-group">
+    <label for="confrimpassword">Confirm Password</label>
+    <input type="password" class="form-control" name="cpass" #confrimpassword="ngModel" ngModel [(ngModel)]="cps">
+  </div>
+  <div class="form-group">
+    <button type="submit" name="Submit" class="btn btn-info">Submit</button>
+    <button (click)="updateData(form)" class="btn btn-info">Update</button>
+  
+</div>
+</form>
+<div *ngIf="showFlag">
+    <table>
+        <tr>
+            <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>course</th>
+    <th>Password</th>
+    <th>Confirm Password</th>
+        </tr>
+        <tr *ngFor="let dt of formData">
+        <td>{{dt.fname}}</td>
+        <td>{{dt.lname}}</td>
+        <td>{{dt.email}}</td>
+        <td>{{dt.course}}</td>
+        <td>{{dt.pass}}</td>
+        <td>{{dt.cpass}}</td>
+        
+   
+    <td><button class="btn btn-danger" (click)="Delet(dt)">Delete</button></td>
+    <td><button class="bn btn-warning" (click)="Update(dt)">Update</button></td>
+</tr>
+</table>
+</div>

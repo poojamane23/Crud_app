@@ -1,0 +1,13 @@
+<p>directive works!</p>
+<p *ngIf="showFlag && (age > 18)">{{showdata}}</p>
+
+<!-- *ngFor-->
+<select class="form-control" [(ngModel)] = "selectedCounter">
+    <option *ngFor="let new of country" >{{new}}</option>
+</select>
+
+<table>
+    <tr>
+        <td *ngFor="let cor of country">{{cor}}</td>
+    </tr>
+</table>
